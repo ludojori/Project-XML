@@ -1,0 +1,22 @@
+<quizgame>
+    <gamesettings>
+    </gamesettings>
+
+    <quizquestions>
+                <quizquestion idx="1">
+                    <question>This is the first question(?)</question>
+                    <option idx="1" isTrue="false">This is a wrong first option.</option>
+                    <option idx="2" isTrue="false">This is a wrong second option.</option>
+                    <option idx="3" isTrue="true">This is a correct third option.</option>
+                    <option idx="4" isTrue="false">This is a wrong forth option.</option>
+                </quizquestion>
+                <quizquestion idx="2">
+                    <question>This is the second question(?)</question>
+                    <option idx="1" isTrue="false">This is a wrong first option.</option>
+                    <option idx="2" isTrue="true">This is a correct second option.</option>
+                    <option idx="3" isTrue="false">This is a wrong third option.</option>
+                    <option idx="4" isTrue="false">This is a wrong forth option.</option>
+                </quizquestion>
+    </quizquestions>
+
+</quizgame>
