@@ -2,6 +2,7 @@
 using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.IO;
+using UnityEngine;
 
 namespace AssemblyCSharpEditor
 {
@@ -14,8 +15,6 @@ namespace AssemblyCSharpEditor
         [XmlArray("Rooms")]
         [XmlArrayItem("Room")]
         public List<Room> Rooms = new List<Room>();
-
-
 
 		public static Labyrinth LoadXml(string path)
 		{
@@ -77,59 +76,8 @@ namespace AssemblyCSharpEditor
 
 		public bool StartingRoom;
 
-        public GameRollABall GameRollABall;
-        public GameOtherType GameOtherType;
-    }
-
-    public class GameRollABall
-	{
-		public int MinPoints;
-		[XmlArray("GameElements")]
-		[XmlArrayItem("GameElement")]
-		public List<GameElement> gameElements = new List<GameElement>();
-	}
-
-    public class GameElement
-    {
-        public string Text;
-        public string Image;
-        public string Texture;
-        public string Name;
-        public string Type;
-        public string Ball;
-    }
-
-    public class GameWordSoup
-    {
-        [XmlAttribute("Points")]
-        public string Points;
-        [XmlArray("Rows")]
-        [XmlArrayItem("Row")]
-        public List<string> rows = new List<string>();
-        [XmlArray("Dictionary")]
-        [XmlArrayItem("Word")]
-        public List<string> words = new List<string>();
-        //[XmlArray("Hints")]
-        //[XmlArrayItem("Hint")]
-        //public List<string> hints = new List<string>();
-        [XmlElement("Hints")]
-        public string Hints;
-    }
-
-    public class GameOtherType
-    {
-        //this is a sample structure of the settings of GameOtherType:
-        [XmlAttribute("AttrName")]
-        public string AttrName;
-        [XmlArray("Settings")]
-        [XmlArrayItem("Setting")]
-        public List<string> rows = new List<string>();
-        [XmlArray("Dictionary")]
-        [XmlArrayItem("Word")]
-        public List<string> words = new List<string>();
-        [XmlArray("Hints")]
-        [XmlArrayItem("Hint")]
-        public List<string> hints = new List<string>();
+        public GameRollABallDef GameRollABall; //BB - 20210102
+        public GameOtherTypeDef GameOtherType; //BB - 20210102
     }
     
     public class Audio
@@ -148,8 +96,7 @@ namespace AssemblyCSharpEditor
 	{
 		public string Text;
         public string Image;
-        public GameWordSoup GameWordSoup; //BB - 20210102
-        //public Game2DPuzzle GameWordSoup; //BB - 20210102
+        public GameWordSoupDef GameWordSoup; //BB - 20210102
     }
 
 	public class Question
@@ -163,4 +110,10 @@ namespace AssemblyCSharpEditor
 		public string Room;
 		public Question Question;
 	}
+
+    public interface miniGameBuilder
+    {
+        void Build2DMiniGame(Slide slide, GameObject slideText); //builds a 2D minigame to be shown on a slide in a maze room
+        void Build3DMiniGame(Room room); //builds a 3D minigame to be shown in a maze room
+    }
 }
