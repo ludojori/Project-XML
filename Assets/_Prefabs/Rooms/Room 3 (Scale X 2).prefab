@@ -850,6 +850,16 @@ PrefabInstance:
       propertyPath: m_Range
       value: 0.24
       objectReference: {fileID: 0}
+    - target: {fileID: 4691913472317719107, guid: 21c6b47a9ee10e743898c693da256733,
+        type: 3}
+      propertyPath: m_Name
+      value: Barrel_Secret_Entrance
+      objectReference: {fileID: 0}
+    - target: {fileID: 4948874098053645584, guid: 21c6b47a9ee10e743898c693da256733,
+        type: 3}
+      propertyPath: m_Name
+      value: Tower_Door
+      objectReference: {fileID: 0}
     - target: {fileID: 5413126149918761541, guid: 21c6b47a9ee10e743898c693da256733,
         type: 3}
       propertyPath: m_Range
@@ -1324,6 +1334,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Range
       value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 8299665517739602270, guid: 21c6b47a9ee10e743898c693da256733,
+        type: 3}
+      propertyPath: m_Name
+      value: Room3_Entrance
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21c6b47a9ee10e743898c693da256733, type: 3}

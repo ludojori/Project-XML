@@ -20,10 +20,12 @@
 <!ATTLIST quizquestion idx CDATA #REQUIRED>
 <!ATTLIST quizquestion points CDATA #REQUIRED>
 <!ATTLIST option idx CDATA #REQUIRED>
-<!ATTLIST option isTrue CDATA #REQUIRED>
+<!ATTLIST option isTrue (true | false) #REQUIRED>
 <!ELEMENT question (#PCDATA)>
 <!ELEMENT option (#PCDATA)>
 ]>
+
+<!-- IMPORTANT NOTE: Decimal separator for float values must be a comma "," ! -->
 
 <quizgame>
     <gamesettings>
@@ -32,7 +34,7 @@
     <rooms>
                 <room prefab_name="RoomsAll">
                     <transform>
-                    <position x="29.3" y="3.15" z="-44.01"/>
+                    <position x="29,3" y="3,15" z="-44,01"/>
                     <rotation x="0" y="-90" z="0"/>
                     <scale x="1" y="1" z="1"/>
                     </transform>
@@ -43,7 +45,8 @@
                 <door prefab_name="Room1 Exit" limit_points="50"/>
                 <door prefab_name="Room_2_Intermediary_Gate_1" limit_points="100"/>
                 <door prefab_name="Room3_Entrance" limit_points="150"/>
-                <door prefab_name="PairDoors" limit_points="200"/>
+                <door prefab_name="Tower_Door" limit_points="200"/>
+                <door prefab_name="Barrel_Secret_Entrance" limit_points="200"/>
     </doors>
 
     <quizquestions>
@@ -59,7 +62,7 @@
                     <option idx="1" isTrue="false">Беси</option>
                     <option idx="2" isTrue="false">Мизи</option>
                 </quizquestion>
-                    <quizquestion idx="2" points="15">
+                <quizquestion idx="2" points="15">
                     <question>Кой български цар победил епирския владетел Теодор Комнин в битката при Клокотница на 9 март 1230 г. “:</question>
                     <option idx="0" isTrue="false">Калоян</option>
                     <option idx="1" isTrue="false">Симеон</option>
@@ -71,7 +74,7 @@
                     <option idx="1" isTrue="true">Тервел</option>
                     <option idx="2" isTrue="false">Омуртаг</option>
                 </quizquestion>
-                    <quizquestion idx="4" points="15">
+                <quizquestion idx="4" points="15">
                     <question>Апокрифите са:</question>
                     <option idx="0" isTrue="false">Произведения, описващи живота на светци</option>
                     <option idx="1" isTrue="true">Анонимни средновековни ръкописи</option>
@@ -83,7 +86,7 @@
                     <option idx="1" isTrue="true">Глаголица</option>
                     <option idx="2" isTrue="false">Димотическо писмо</option>
                 </quizquestion>
-                    <quizquestion idx="6" points="10">
+                <quizquestion idx="6" points="10">
                     <question>Според Търновската конституция България е:</question>
                     <option idx="0" isTrue="false">Абсолютна монархия</option>
                     <option idx="1" isTrue="false">Парламентарна република</option>
@@ -95,7 +98,7 @@
                     <option idx="1" isTrue="false">Захари Стоянов</option>
                     <option idx="2" isTrue="true">Алеко Богориди</option>
                 </quizquestion>
-                    <quizquestion idx="8" points="20">
+                <quizquestion idx="8" points="20">
                     <question>Кой известен чужденец е изпратил от Пазарджик кореспонденция за жертвите в Батак през 1876 г.:</question>
                     <option idx="0" isTrue="false">Юджийн Скайлър</option>
                     <option idx="1" isTrue="true">Джанюариъс Макгахан</option>
@@ -107,7 +110,7 @@
                     <option idx="1" isTrue="true">Провеждането на Великденската акция</option>
                     <option idx="2" isTrue="false">Учредяването на Априловската гимназия</option>
                 </quizquestion>
-                    <quizquestion idx="10" points="0">
+                <quizquestion idx="10" points="0">
                     <question>Коя от Великите сили се обявява в защита на Съединението</question>
                     <option idx="0" isTrue="false">Франция</option>
                     <option idx="1" isTrue="false">Русия</option>
@@ -119,7 +122,7 @@
                     <option idx="1" isTrue="true">Стара планина</option>
                     <option idx="2" isTrue="false">Черно море</option>
                 </quizquestion>
-                    <quizquestion idx="12" points="10">
+                <quizquestion idx="12" points="10">
                     <question>Хан Омуртаг въвежда комитатите, за да:</question>
                     <option idx="0" isTrue="false">Стимулира развитието на търговията</option>
                     <option idx="1" isTrue="false">Разшири границите на ханството</option>
@@ -131,11 +134,11 @@
                     <option idx="1" isTrue="false">Съд за вино</option>
                     <option idx="2" isTrue="true">Златопечатна грамота</option>
                 </quizquestion>
-                    <quizquestion idx="14" points="15">
+                <quizquestion idx="14" points="15">
                     <question>Вторият български монарх след Освобождението е:</question>
                     <option idx="0" isTrue="false">Александър Батенберг</option>
                     <option idx="1" isTrue="true">Фердинад І</option>
-                    <option idx="2" isTrue="flase">Симеон ІІ</option>
+                    <option idx="2" isTrue="false">Симеон ІІ</option>
                 </quizquestion>
                 <quizquestion idx="15" points="10">
                     <question>Освободителното въстание на Асеневци избухва през:</question>
@@ -143,7 +146,7 @@
                     <option idx="1" isTrue="true">1185 г.</option>
                     <option idx="2" isTrue="false">1196 г.</option>
                 </quizquestion>
-                    <quizquestion idx="16" points="15">
+                <quizquestion idx="16" points="15">
                     <question>През 1846 г. Найден Геров организира в Копривщица:</question>
                     <option idx="0" isTrue="true">Първото класно училище</option>
                     <option idx="1" isTrue="false">Първата гимназия</option>
@@ -155,7 +158,7 @@
                     <option idx="1" isTrue="false">Панония</option>
                     <option idx="2" isTrue="false">Германия</option>
                 </quizquestion>
-                    <quizquestion idx="18" points="15">
+                <quizquestion idx="18" points="15">
                     <question>Първият български екзарх е:</question>
                     <option idx="0" isTrue="false">Антим І</option>
                     <option idx="1" isTrue="true">Иларион Ловчански</option>

@@ -211,6 +211,11 @@ PrefabInstance:
       propertyPath: m_Range
       value: 18.9
       objectReference: {fileID: 0}
+    - target: {fileID: 375560669785062124, guid: b69c33b52bfc95e4286d246fc5a846f7,
+        type: 3}
+      propertyPath: m_Name
+      value: Room_2_Intermediary_Gate_1
+      objectReference: {fileID: 0}
     - target: {fileID: 495632812708262207, guid: b69c33b52bfc95e4286d246fc5a846f7,
         type: 3}
       propertyPath: m_Range

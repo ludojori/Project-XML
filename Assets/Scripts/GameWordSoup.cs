@@ -7,37 +7,14 @@ using TMPro;
 public class GameWordSoup : MonoBehaviour
 {
     //TODO: Need to make a Stack with the last clicked tiles and be able to unclick the last pressed
-    public static string resultWord = "";
-    public static int wordsFound = 0;
     public static string[] dictionaryWordSoup = null;
     public static int points = 0; 
-    public static Stack<GameObject> lastPressed = new Stack<GameObject>();
-    public static int direction = 0; //could be either vertical downwards or horizontal to the right; 1 for vertical, 2 for horizontal
     private static GameObject globalGameManager;
     private static bool gameStarted = false;
     public const int HEIGHT = 5;
     public const int WIDTH = 8;
     private const int INIT = 3, FOUND_WORD = 2, END_GAME = 4;
 
-    private bool contains(string[] allWords, string currentWord)
-    {
-        //.........
-        return false;
-    }
-
-    private bool isValidTile(string currentName)
-    {
-        //TODO: Check validity for tiles that are parts of already foud words
-
-        string lastPressedName = lastPressed.Peek().name;
-        //pretty hardcoded names for now, but this will be the idea
-
-        //Debug.Log(lastPressedName);
-        //Debug.Log(currentName);
-
-        //..
-        return false;
-    }
 
     private void playTaDaSound(int whatToPlay)
     {
@@ -92,14 +69,10 @@ public class GameWordSoup : MonoBehaviour
             gameStarted = true;
             return;
         }
+        // .......
+        //at finding a word, increase points by calling:
+        //GlobalGameManager.increasePointsOnly(points);
 
-        string text = gameObject.transform.GetChild(0).GetComponent<TextMeshPro>().text;
-
-        GameObject current = GameObject.Find(gameObject.name);
-        Material tileMaterial = GetComponent<Renderer>().material;
-
-        // means the word was already found. Probably should work with tags instead of colors ¯\_(ツ)_/¯
-        //..
         //Debug.Log(res);
 
     }
