@@ -42,12 +42,13 @@ public class DoorController : MonoBehaviour
     {
         string doorName = name;
         doorAnim.runtimeAnimatorController = Resources.Load("Door_Wooden_Round_Right", typeof(RuntimeAnimatorController)) as RuntimeAnimatorController;
-        if (audioSource)
-        {
-            audioSource.Play();
-        }
+
         if (!doorOpen)
         {
+            if (audioSource)
+            {
+                audioSource.Play();
+            }
             switch (doorName)
             {
                 case "Room1 Entrance":             doorAnim.Play("Room1EntranceDoorOpen", 0, 0.0f); break;

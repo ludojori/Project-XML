@@ -11,7 +11,7 @@
 <!ELEMENT rotation EMPTY>
 <!ELEMENT scale EMPTY>
 <!ELEMENT door EMPTY>
-<!ATTLIST room prefab_name CDATA #REQUIRED>
+<!ATTLIST room prefab_name CDATA #REQUIRED next_to_room CDATA #REQUIRED hide_door_cover_at_wall CDATA #REQUIRED>
 <!ATTLIST position x CDATA #REQUIRED y CDATA #REQUIRED z CDATA #REQUIRED>
 <!ATTLIST rotation x CDATA #REQUIRED y CDATA #REQUIRED z CDATA #REQUIRED>
 <!ATTLIST scale x CDATA #REQUIRED y CDATA #REQUIRED z CDATA #REQUIRED>
@@ -32,7 +32,7 @@
     </gamesettings>
 
     <rooms>
-                <room prefab_name="RoomsAll">
+                <room prefab_name="RoomsAll" next_to_room="Anteroom" hide_door_cover_at_wall="WallS">
                     <transform>
                     <position x="29,3" y="3,15" z="-44,01"/>
                     <rotation x="0" y="-90" z="0"/>

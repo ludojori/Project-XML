@@ -8,6 +8,7 @@ using QuizGame;
 
 public class UIManager : MonoBehaviour
 {
+    Canvas questionCanvas;
     XMLReader xmlReader;
     List<QuizQuestion> questions;
 

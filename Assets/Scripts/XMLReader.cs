@@ -10,7 +10,7 @@ namespace QuizGame
         XmlDocument quizGameXml;
 
         // Start is called before the first frame update
-        void Awake()
+        private void Awake()
         {
             quizGameXml = new XmlDocument();
             try
@@ -46,6 +46,11 @@ namespace QuizGame
 
             foreach(XmlNode xmlRoom in xmlRooms)
             {
+                string neighborRoom = xmlRoom.Attributes["next_to_room"].Value;
+                string doorCoverAtWall = xmlRoom.Attributes["hide_door_cover_at_wall"].Value;
+                GameObject doorCover = GameObject.Find(neighborRoom + "/Walls/" + doorCoverAtWall + "/DoorCover");
+                doorCover.SetActive(false);
+
                 string prefabName = xmlRoom.Attributes["prefab_name"].Value;
                 GameObject roomPrefab = Resources.Load(prefabName, typeof(GameObject)) as GameObject;
                 if (roomPrefab != null)
@@ -72,7 +77,7 @@ namespace QuizGame
                     float scaleZ = float.Parse(xmlRoomScale.Attributes["z"].Value);
                     Vector3 scale = new Vector3(scaleX, scaleY, scaleZ);
 
-                    GameObject instance = Instantiate<GameObject>(roomPrefab, position, quaternion) as GameObject;
+                    GameObject instance = Instantiate(roomPrefab, position, quaternion);
                     instance.transform.localScale = scale;
                 }
                 else
