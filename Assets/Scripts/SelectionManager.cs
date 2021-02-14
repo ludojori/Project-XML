@@ -13,12 +13,16 @@ public class SelectionManager : MonoBehaviour
     private Transform _selection;
     private Camera _camera;
 
+    private UIManager uiManager;
+
     private void Awake()
     {
         _selectionResponse = GetComponent<ISelectionResponse>();
 
         _camera = GameObject.Find("CustomFPSController").GetComponentInChildren<Camera>();
         if (!_camera) Debug.LogError("In SelectionManager::Awake(): Failed to find gameObject \"Player\".");
+
+        uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
     }
 
     // Update is called once per frame
@@ -50,7 +54,7 @@ public class SelectionManager : MonoBehaviour
 
         if (_selection && Input.GetMouseButtonDown(0))
         {
-            UIManager.GenerateQuestion();
+            uiManager.GenerateQuestion();
         }
 
         #endregion

@@ -14,7 +14,7 @@ public class DoorController : MonoBehaviour
         if(doorAnim == null)
         {
             doorAnim = gameObject.AddComponent<Animator>();
-            Debug.Log("Animator for object " + gameObject.name + " missing. Creating one now.");
+            // Debug.Log("Animator for object " + gameObject.name + " missing. Creating one now.");
         }
         
         if (!gameObject.GetComponent<Rigidbody>())
@@ -27,11 +27,11 @@ public class DoorController : MonoBehaviour
         if(audioSource == null)
         {
             audioSource = gameObject.AddComponent<AudioSource>();
-            Debug.Log("Audio source for object " + gameObject.name + " missing. Creating one now.");
+            // Debug.Log("Audio source for object " + gameObject.name + " missing. Creating one now.");
         }
         if (!(audioSource.clip = Resources.Load("Old_Door_Creaking-Sound", typeof(AudioClip)) as AudioClip))
         {
-            Debug.Log("Failed to load audio clip.");
+            Debug.Log("Failed to load audio clip for " + name + ".");
         }
         gameObject.isStatic = false;
         gameObject.tag = "DungeonDoor";

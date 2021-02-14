@@ -8,11 +8,13 @@ namespace QuizGame
     public class XMLReader : MonoBehaviour
     {
         XmlDocument quizGameXml;
+        public List<QuizQuestion> questions { get; private set; }
 
         // Start is called before the first frame update
         private void Awake()
         {
             quizGameXml = new XmlDocument();
+            questions = new List<QuizQuestion>();
             try
             {
                 quizGameXml.Load("Assets/Resources/QuizGame.xml");
@@ -22,13 +24,19 @@ namespace QuizGame
                 Debug.LogException(e, this);
                 Debug.Log("Failed to load QuizGame.xml");
             }
+            if(quizGameXml == null)
+            {
+                Debug.Log("quizGameXml is null.");
+            }
             InstantiateAllRooms();
+            questions = LoadAllQuestions();
         }
 
         public List<QuizQuestion> LoadAllQuestions()
         {
-            XmlNode root = quizGameXml.DocumentElement;
-            XmlNodeList quizquestions = root.SelectNodes("descendant::quizquestions/quizquestion");
+            // Equivalent alternative: XmlNode root = quizGameXml.DocumentElement;
+
+            XmlNodeList quizquestions = quizGameXml.SelectNodes("descendant::quizquestions/quizquestion");
             List<QuizQuestion> questions = new List<QuizQuestion>(quizquestions.Count);
 
             foreach (XmlNode quizquestion in quizquestions)
@@ -36,6 +44,8 @@ namespace QuizGame
                 QuizQuestion question = new QuizQuestion(quizquestion);
                 questions.Add(question);
             }
+
+            // Debug.Log("LoadAllQuestions() successful with question count: " + questions.Count);
             return questions;
         }
 
