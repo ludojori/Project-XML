@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ButtonManager : MonoBehaviour
 {
     public string optionName { get; private set; }
@@ -14,7 +15,7 @@ public class ButtonManager : MonoBehaviour
 
     public void OptionOnClick()
     {
-        
+        //Debug.Log("Picked Question"+);
     }
 
     // Update is called once per frame
