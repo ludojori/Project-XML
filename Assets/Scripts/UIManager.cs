@@ -71,9 +71,4 @@ using QuizGame;
             return index;
         }
 
-        public void RemoveCurrentCanvas()
-        {
-            Destroy(GameObject.Find("QuestionCanvas(Clone)"));
-        }
-
     }
