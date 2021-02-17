@@ -230,7 +230,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3152946886893128607, guid: 867d4db7bd2fdbf46bbefec1fddc22ee,
           type: 3}
-        m_MethodName: RemoveCurrentCanvas
+        m_MethodName: RemoveCurrentQuestionCanvas
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

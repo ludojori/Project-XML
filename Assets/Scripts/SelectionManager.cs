@@ -37,10 +37,11 @@ public class SelectionManager : MonoBehaviour
 
         // Selection Determination
         _selection = null;
-        if(Physics.Raycast(ray, out var hit))
+        
+        if (Physics.Raycast(ray, out var hit))
         {
             Transform selection = hit.transform;
-            if(selection.CompareTag(selectableTag))
+            if(selection.CompareTag(selectableTag) && !uiManager.isQuestionCanvasActive)
             {
                 _selection = selection;
             }
