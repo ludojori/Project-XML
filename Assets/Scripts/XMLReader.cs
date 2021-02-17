@@ -118,6 +118,18 @@ namespace QuizGame
         public string text { get; private set; }
         public bool isTrue { get; private set; }
 
+        public QuizOption(QuizOption other)
+        {
+            text = other.text;
+            isTrue = other.isTrue;
+        }
+
+        public QuizOption(string text, bool isTrue)
+        {
+            this.text = text;
+            this.isTrue = isTrue;
+        }
+
         public QuizOption(XmlNode optionNode)
         {
             text = optionNode.InnerText;
@@ -130,6 +142,24 @@ namespace QuizGame
         public int points { get; private set; }
         public string questionText { get; private set; }
         public List<QuizOption> options { get; private set; }
+
+        public QuizQuestion()
+        {
+            points = 0;
+            questionText = "SampleText";
+            options = new List<QuizOption>();
+        }
+
+        public QuizQuestion(QuizQuestion other)
+        {
+            points = other.points;
+            questionText = other.questionText;
+            options = new List<QuizOption>(other.options.Count);
+            foreach (QuizOption option in other.options)
+            {
+                options.Add(option);
+            }
+        }
 
         public QuizQuestion(XmlNode quizQuestionNode)
         {

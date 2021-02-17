@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using QuizGame;
 
 public class UIManager : MonoBehaviour
@@ -9,9 +10,12 @@ public class UIManager : MonoBehaviour
     Canvas questionCanvasPrefab;
     Canvas questionOptionPrefab;
     XMLReader xmlReader;
+
     List<QuizQuestion> questions;
     List<QuizQuestion> questionsCopy;
-    public bool isQuestionCanvasActive = false;
+
+    [HideInInspector] public bool isQuestionCanvasActive = false;
+    public static QuizQuestion pickedQuestion;
 
     private void Start()
     {
@@ -29,7 +33,7 @@ public class UIManager : MonoBehaviour
 
         // Pick Random Question
         int questionIndex = PickQuestion();
-        QuizQuestion pickedQuestion = questionsCopy[questionIndex];
+        pickedQuestion = questionsCopy[questionIndex];
         questionsCopy.Remove(pickedQuestion);
 
         // Instantiate Question Canvas
@@ -39,8 +43,7 @@ public class UIManager : MonoBehaviour
         Text questionText = questionCanvas.GetComponentInChildren<Text>();
         questionText.text = pickedQuestion.questionText;
 
-        // Instantiate Options Canvases WIth Parent Question Canvas
-        int index = 0;
+        // Instantiate Options Canvases With Parent Question Canvas
         float optionSpacing = 500;
         foreach (QuizOption option in pickedQuestion.options)
         {
@@ -51,10 +54,15 @@ public class UIManager : MonoBehaviour
 
             questionOption.transform.SetPositionAndRotation(optionPosition, Quaternion.identity);
             questionOption.GetComponentInChildren<Text>().text = option.text;
-            questionOption.name = index.ToString();
-            questionOption.GetComponentInChildren<Button>().onClick.AddListener(questionOption.GetComponentInChildren<ButtonManager>().OptionOnClick);
 
             optionSpacing -= 50;
+        }
+
+        GameObject[] options = GameObject.FindGameObjectsWithTag("OptionButton");
+        int index = 0;
+        foreach(GameObject option in options)
+        {
+            option.name = index.ToString();
             index++;
         }
 
@@ -77,6 +85,36 @@ public class UIManager : MonoBehaviour
         GameObject.Find("UIManager").GetComponent<UIManager>().isQuestionCanvasActive = false;
         Destroy(GameObject.Find("QuestionCanvas(Clone)"));
         GameObject.Find("CustomFPSController").GetComponent<CustomFirstPersonController>().enabled = true;
+    }
+
+    public void OnOptionClicked()
+    {
+        int optionIndex = int.Parse(EventSystem.current.currentSelectedGameObject.name);
+        
+        if (pickedQuestion != null)
+        {
+            int questionPoints = pickedQuestion.points;
+            
+            if (pickedQuestion.options[optionIndex].isTrue)
+            {
+                EventSystem.current.currentSelectedGameObject.GetComponent<Image>().color = Color.green;
+                Text pointsText = GameObject.Find("QuizGamePointsCanvas(Clone)/PointsDisplay/PointsCounter").GetComponent<Text>();
+                int currentPoints = int.Parse(pointsText.text);
+                currentPoints += questionPoints;
+                pointsText.text = currentPoints.ToString();
+            }
+            else
+            {
+                EventSystem.current.currentSelectedGameObject.GetComponent<Image>().color = Color.red;
+            }
+
+            GameObject[] options = GameObject.FindGameObjectsWithTag("OptionButton");
+            foreach (GameObject option in options)
+            {
+                option.GetComponent<Button>().interactable = false;
+            }
+        }
+        
     }
 
 }
