@@ -45,8 +45,10 @@
                 <door prefab_name="Room1 Exit" limit_points="50"/>
                 <door prefab_name="Room_2_Intermediary_Gate_1" limit_points="100"/>
                 <door prefab_name="Room3_Entrance" limit_points="150"/>
-                <door prefab_name="Tower_Door" limit_points="200"/>
-                <door prefab_name="Barrel_Secret_Entrance" limit_points="200"/>
+                <door prefab_name="Room3_Door_Iron" limit_points="200"/>
+                <door prefab_name="Room3_Door_Wooden_Round" limit_points="200"/>
+                <door prefab_name="Tower_Door" limit_points="250"/>
+                <door prefab_name="Barrel_Secret_Entrance" limit_points="250"/>
     </doors>
 
     <quizquestions>
@@ -110,7 +112,7 @@
                     <option idx="1" isTrue="true">Провеждането на Великденската акция</option>
                     <option idx="2" isTrue="false">Учредяването на Априловската гимназия</option>
                 </quizquestion>
-                <quizquestion idx="10" points="0">
+                <quizquestion idx="10" points="10">
                     <question>Коя от Великите сили се обявява в защита на Съединението</question>
                     <option idx="0" isTrue="false">Франция</option>
                     <option idx="1" isTrue="false">Русия</option>

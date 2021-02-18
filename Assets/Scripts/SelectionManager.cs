@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[DisallowMultipleComponent]
-
 public class SelectionManager : MonoBehaviour
 {
     [SerializeField, Tooltip("Make sure the tag specified exists.")]
     private string selectableTag = "Selectable";
+    [SerializeField, Tooltip("The distance from which the selectable item can be selected.")]
+    private float selectDistance = 0.0f;
 
     private ISelectionResponse _selectionResponse;
     private Transform _selection;
@@ -38,7 +38,7 @@ public class SelectionManager : MonoBehaviour
         // Selection Determination
         _selection = null;
         
-        if (Physics.Raycast(ray, out var hit))
+        if (Physics.Raycast(ray, out var hit, selectDistance))
         {
             Transform selection = hit.transform;
             if(selection.CompareTag(selectableTag) && !uiManager.isQuestionCanvasActive)

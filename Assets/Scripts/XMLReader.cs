@@ -5,6 +5,7 @@ using System.Xml;
 
 namespace QuizGame
 {
+    [DisallowMultipleComponent]
     public class XMLReader : MonoBehaviour
     {
         XmlDocument quizGameXml;
@@ -34,8 +35,6 @@ namespace QuizGame
 
         public List<QuizQuestion> LoadAllQuestions()
         {
-            // Equivalent alternative: XmlNode root = quizGameXml.DocumentElement;
-
             XmlNodeList quizquestions = quizGameXml.SelectNodes("descendant::quizquestions/quizquestion");
             List<QuizQuestion> questions = new List<QuizQuestion>(quizquestions.Count);
 
@@ -45,7 +44,6 @@ namespace QuizGame
                 questions.Add(question);
             }
 
-            // Debug.Log("LoadAllQuestions() successful with question count: " + questions.Count);
             return questions;
         }
 
@@ -97,6 +95,28 @@ namespace QuizGame
             }
         }
 
+        public Dictionary<string, int> LoadAllDoors()
+        {
+            XmlNode root = quizGameXml.DocumentElement;
+            XmlNodeList xmlDoors = root.SelectNodes("descendant::doors/door");
+            Dictionary<string, int> doors = new Dictionary<string, int>();
+            
+            if(xmlDoors == null)
+            {
+                Debug.Log("xmlDoors is null.");
+            }
+            if (doors == null)
+            {
+                Debug.Log("doors is null.");
+            }
+            foreach(XmlNode xmlDoor in xmlDoors)
+            {
+                doors.Add(xmlDoor.Attributes["prefab_name"].Value, int.Parse(xmlDoor.Attributes["limit_points"].Value));
+            }
+            return doors;
+        }
+
+        /*
         public List<Door> LoadAllDoors()
         {
             XmlNode root = quizGameXml.DocumentElement;
@@ -111,6 +131,7 @@ namespace QuizGame
 
             return doors;
         }
+        */
     }
 
     public class QuizOption

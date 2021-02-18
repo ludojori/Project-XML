@@ -1,15 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using QuizGame;
 
 public class DoorController : MonoBehaviour
 {
+    private XMLReader xmlReader;
+    private Dictionary<string, int> doors;
     private Animator doorAnim;
     private AudioSource audioSource;
     private bool doorOpen = false;
 
     private void Start()
     {
+        xmlReader = GameObject.Find("GlobalGameManager").GetComponent<XMLReader>();
+        doors = xmlReader.LoadAllDoors();
+
         doorAnim = gameObject.GetComponent<Animator>();
         if(doorAnim == null)
         {
@@ -43,23 +49,98 @@ public class DoorController : MonoBehaviour
         string doorName = name;
         doorAnim.runtimeAnimatorController = Resources.Load("Door_Wooden_Round_Right", typeof(RuntimeAnimatorController)) as RuntimeAnimatorController;
 
-        if (!doorOpen)
+        if (!doorOpen )
         {
-            if (audioSource)
-            {
-                audioSource.Play();
-            }
             switch (doorName)
             {
-                case "Room1 Entrance":             doorAnim.Play("Room1EntranceDoorOpen", 0, 0.0f); break;
-                case "Room1 Exit":                 doorAnim.Play("Room1ExitDoorOpen", 0, 0.0f); break;
-                case "Room_2_Intermediary_Gate_1": doorAnim.Play("Room2GateOpen", 0, 0.0f); break;
-                case "Room3_Entrance":             doorAnim.Play("Room3EntranceDoorOpen", 0, 0.0f); break;
-                case "Tower_Door":                 doorAnim.Play("TowerDoorOpen", 0, 0.0f); break;
-                case "Barrel_Secret_Entrance":     doorAnim.Play("BarrelOpen", 0, 0.0f); break;
-                default: Debug.Log("Unidentified door, cannot open."); break;
+                case "Room1 Entrance":
+                    if(audioSource)audioSource.Play();
+                    doorAnim.Play("Room1EntranceDoorOpen", 0, 0.0f);
+                    doorOpen = true;
+                    break;
+                case "Room1 Exit":
+                    if (UIManager.pointsCount >= doors[doorName])
+                    {
+                        if (audioSource) audioSource.Play();
+                        doorAnim.Play("Room1ExitDoorOpen", 0, 0.0f);
+                        doorOpen = true;
+                    }
+                    break;
+                case "Room_2_Intermediary_Gate_1":
+                    if (UIManager.pointsCount >= doors[doorName])
+                    {
+                        if (audioSource) audioSource.Play();
+                        doorAnim.Play("Room2GateOpen", 0, 0.0f);
+                        doorOpen = true;
+                    }
+                    break;
+                case "Room3_Entrance":
+                    if (UIManager.pointsCount >= doors[doorName])
+                    {
+                        if (audioSource) audioSource.Play();
+                        doorAnim.Play("Room3EntranceDoorOpen", 0, 0.0f);
+                        doorOpen = true;
+                    }
+                    break;
+                case "Room3_Door_Iron":
+                    if (UIManager.pointsCount >= doors[doorName])
+                    {
+                        if (audioSource) audioSource.Play();
+                        doorAnim.Play("TowerDoorOpen", 0, 0.0f);
+                        doorOpen = true;
+                    }
+                    break;
+                case "Room3_Door_Wooden_Round":
+                    if (UIManager.pointsCount >= doors[doorName])
+                    {
+                        if (audioSource) audioSource.Play();
+                        doorAnim.Play("Room1EntranceDoorOpen", 0, 0.0f);
+                        doorOpen = true;
+                    }
+                    break;
+                case "Tower_Door":
+                    if (UIManager.pointsCount >= doors[doorName])
+                    {
+                        if (audioSource) audioSource.Play();
+                        doorAnim.Play("TowerDoorOpen", 0, 0.0f);
+                        doorOpen = true;
+                    }
+                    break;
+                case "Barrel_Secret_Entrance":
+                    if (UIManager.pointsCount >= doors[doorName])
+                    {
+                        if (audioSource) audioSource.Play();
+                        doorAnim.Play("BarrelOpen", 0, 0.0f);
+                        doorOpen = true;
+                    }
+                    break;
+                case "Room3_Door_Wooden_Extra":
+                    if (audioSource) audioSource.Play();
+                    doorAnim.Play("Room3EntranceDoorOpen", 0, 0.0f);
+                    doorOpen = true;
+                    break;
+                case "Room3_Basement_Door_Extra":
+                    if (audioSource) audioSource.Play();
+                    doorAnim.Play("Room1EntranceDoorOpen", 0, 0.0f);
+                    doorOpen = true;
+                    break;
+                case "Room3_DoorGate_Wooden_Extra_Right":
+                    if (audioSource) audioSource.Play();
+                    doorAnim.Play("Room3EntranceDoorOpen", 0, 0.0f);
+                    doorOpen = true;
+                    break;
+                case "Room3_DoorGate_Wooden_Extra_Left":
+                    if (audioSource) audioSource.Play();
+                    doorAnim.Play("TowerDoorOpen", 0, 0.0f);
+                    doorOpen = true;
+                    break;
+                case "Room3_Door_Wooden_Round_Extra_2":
+                    if (audioSource) audioSource.Play();
+                    doorAnim.Play("Room1ExitDoorOpen", 0, 0.0f);
+                    doorOpen = true;
+                    break;
+                default: Debug.Log("Unidentified door, cannot open."); doorOpen = true; break;
             }
-            doorOpen = true;
         }
 
     }

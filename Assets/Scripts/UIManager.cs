@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using QuizGame;
 
+[DisallowMultipleComponent]
 public class UIManager : MonoBehaviour
 {
     Canvas questionCanvasPrefab;
@@ -16,14 +17,22 @@ public class UIManager : MonoBehaviour
 
     [HideInInspector] public bool isQuestionCanvasActive = false;
     public static QuizQuestion pickedQuestion;
+    public static int pointsCount;
 
     private void Start()
     {
         questionCanvasPrefab = Resources.Load("QuestionCanvas", typeof(Canvas)) as Canvas;
         questionOptionPrefab = Resources.Load("QuestionOption", typeof(Canvas)) as Canvas;
+        Canvas quizGamePointsCanvasPrefab = Resources.Load("QuizGamePointsCanvas", typeof(Canvas)) as Canvas;
+        Instantiate(quizGamePointsCanvasPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        quizGamePointsCanvasPrefab.name = "QuizGamePointsCanvas";
+        quizGamePointsCanvasPrefab.renderMode = RenderMode.ScreenSpaceOverlay;
+
+
         xmlReader = GameObject.Find("GlobalGameManager").GetComponent<XMLReader>();
         questions = new List<QuizQuestion>(xmlReader.questions);
         questionsCopy = new List<QuizQuestion>(questions);
+
     }
 
     public void GenerateQuestion()
@@ -99,9 +108,8 @@ public class UIManager : MonoBehaviour
             {
                 EventSystem.current.currentSelectedGameObject.GetComponent<Image>().color = Color.green;
                 Text pointsText = GameObject.Find("QuizGamePointsCanvas(Clone)/PointsDisplay/PointsCounter").GetComponent<Text>();
-                int currentPoints = int.Parse(pointsText.text);
-                currentPoints += questionPoints;
-                pointsText.text = currentPoints.ToString();
+                pointsCount += questionPoints;
+                pointsText.text = pointsCount.ToString();
             }
             else
             {

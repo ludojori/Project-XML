@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DiamondMulticastScript : MonoBehaviour, ISelectionResponse
+public class Diamond : MonoBehaviour
 {
-    delegate void MultiDelegate();
-    MultiDelegate multiDelegate;
+    [SerializeField] private float interactiveDistance = 0;
 
     // Start is called before the first frame update
     void Start()
