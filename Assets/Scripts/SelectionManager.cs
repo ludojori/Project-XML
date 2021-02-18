@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using QuizGame;
 
 public class SelectionManager : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class SelectionManager : MonoBehaviour
     private string selectableTag = "Selectable";
     [SerializeField, Tooltip("The distance from which the selectable item can be selected.")]
     private float selectDistance = 0.0f;
+    public static List<int> arrayList;
+    public static string diamondName;
+    XMLReader xmlReader;
+
 
     private ISelectionResponse _selectionResponse;
     private Transform _selection;
@@ -23,6 +28,22 @@ public class SelectionManager : MonoBehaviour
         if (!_camera) Debug.LogError("In SelectionManager::Awake(): Failed to find gameObject \"Player\".");
 
         uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+    }
+
+    private void Start()
+    {
+        arrayList = new List<int>();
+        xmlReader = GameObject.Find("GlobalGameManager").GetComponent<XMLReader>();
+
+        Dictionary<string, int> doors = xmlReader.LoadAllDoors();
+        foreach (int value in doors.Values)
+        {
+            if (!arrayList.Contains(value))
+            {
+                arrayList.Add(value);
+            }
+
+        }
     }
 
     // Update is called once per frame
@@ -41,9 +62,10 @@ public class SelectionManager : MonoBehaviour
         if (Physics.Raycast(ray, out var hit, selectDistance))
         {
             Transform selection = hit.transform;
-            if(selection.CompareTag(selectableTag) && !uiManager.isQuestionCanvasActive)
+            if (selection.CompareTag(selectableTag) && !uiManager.isQuestionCanvasActive)
             {
                 _selection = selection;
+                diamondName = _selection.name;
             }
         }
 

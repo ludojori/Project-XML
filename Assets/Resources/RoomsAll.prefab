@@ -472,6 +472,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3094264036720046582}
     m_Modifications:
+    - target: {fileID: 119531734650988334, guid: 55a08e917bd24234e8a88f9115691268,
+        type: 3}
+      propertyPath: m_Name
+      value: QuizDiamond3
+      objectReference: {fileID: 0}
     - target: {fileID: 197436806185664500, guid: 55a08e917bd24234e8a88f9115691268,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -652,6 +657,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room 2 (Scale X 2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5244494931616188242, guid: 55a08e917bd24234e8a88f9115691268,
+        type: 3}
+      propertyPath: m_Name
+      value: QuizDiamond2
+      objectReference: {fileID: 0}
     - target: {fileID: 5509994992015800957, guid: 55a08e917bd24234e8a88f9115691268,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -676,6 +686,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 6.920386
+      objectReference: {fileID: 0}
+    - target: {fileID: 8191455904657779228, guid: 55a08e917bd24234e8a88f9115691268,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8888178852639252630, guid: 55a08e917bd24234e8a88f9115691268,
         type: 3}
@@ -1519,6 +1534,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941635443815067829, guid: 94b0b10e4af9d524cab1c37965a3db04,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5949236913061394701, guid: 94b0b10e4af9d524cab1c37965a3db04,
         type: 3}
@@ -2859,6 +2879,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 3943456911400841660, guid: 9a694fb064766d14b9b74f5d91d96c6a,
+        type: 3}
+      propertyPath: m_Name
+      value: QuizDiamond4
+      objectReference: {fileID: 0}
     - target: {fileID: 4005918601262281824, guid: 9a694fb064766d14b9b74f5d91d96c6a,
         type: 3}
       propertyPath: m_Materials.Array.data[1]
@@ -2918,6 +2943,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.722
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964888335251489351, guid: 9a694fb064766d14b9b74f5d91d96c6a,
+        type: 3}
+      propertyPath: m_Name
+      value: QuizDiamond6
       objectReference: {fileID: 0}
     - target: {fileID: 5057118313753857592, guid: 9a694fb064766d14b9b74f5d91d96c6a,
         type: 3}
@@ -3183,6 +3213,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 29.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714385557599352744, guid: 9a694fb064766d14b9b74f5d91d96c6a,
+        type: 3}
+      propertyPath: m_Name
+      value: QuizDiamond5
       objectReference: {fileID: 0}
     - target: {fileID: 7725229088869373444, guid: 9a694fb064766d14b9b74f5d91d96c6a,
         type: 3}

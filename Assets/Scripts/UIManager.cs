@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using QuizGame;
 
+
 [DisallowMultipleComponent]
 public class UIManager : MonoBehaviour
 {
@@ -12,12 +13,16 @@ public class UIManager : MonoBehaviour
     Canvas questionOptionPrefab;
     XMLReader xmlReader;
 
+    public static List<int> arrayList;
+
     List<QuizQuestion> questions;
     List<QuizQuestion> questionsCopy;
 
     [HideInInspector] public bool isQuestionCanvasActive = false;
     public static QuizQuestion pickedQuestion;
     public static int pointsCount;
+    public static string nameOfDiamond;
+    public static bool isDoorOpen = false;
 
     private void Start()
     {
@@ -32,11 +37,24 @@ public class UIManager : MonoBehaviour
         xmlReader = GameObject.Find("GlobalGameManager").GetComponent<XMLReader>();
         questions = new List<QuizQuestion>(xmlReader.questions);
         questionsCopy = new List<QuizQuestion>(questions);
+        
+        arrayList = new List<int>();
 
+        Dictionary<string, int> doors = xmlReader.LoadAllDoors();
+        foreach (int value in doors.Values)
+        {
+            if (!arrayList.Contains(value)) 
+            {
+                arrayList.Add(value);
+            }
+            
+        }
+        
     }
 
     public void GenerateQuestion()
     {
+        //RaycastHit hit;
         Destroy(GameObject.Find("QuestionCanvas(Clone)"));
         isQuestionCanvasActive = true;
 
@@ -110,6 +128,114 @@ public class UIManager : MonoBehaviour
                 Text pointsText = GameObject.Find("QuizGamePointsCanvas(Clone)/PointsDisplay/PointsCounter").GetComponent<Text>();
                 pointsCount += questionPoints;
                 pointsText.text = pointsCount.ToString();
+
+                nameOfDiamond = SelectionManager.diamondName;
+                switch (nameOfDiamond)
+                {
+                    case "QuizDiamond1":
+                        if (pointsCount >= arrayList[0]) 
+                        { 
+                            GameObject.Find("RoomsAll(Clone)/Room 1/"+ nameOfDiamond).GetComponent<MeshCollider>().enabled = false;
+
+                            GameObject.Find("RoomsAll(Clone)/Room 1/Walls/Room1 Exit").GetComponent<Animator>().Play("Room1ExitDoorOpen", 0, 0.0f);
+                            GameObject.Find("RoomsAll(Clone)/Room 1/Walls/Room1 Exit").GetComponent<DoorController>().doorOpen = true;
+
+                            if (GameObject.Find("RoomsAll(Clone)/Room 1/Walls/Room1 Exit").GetComponent<AudioSource>())
+                            {
+                                GameObject.Find("RoomsAll(Clone)/Room 1/Walls/Room1 Exit").GetComponent<AudioSource>().Play();
+                            }
+                        } 
+                        break;
+                    case "QuizDiamond2":
+                        if (pointsCount >= arrayList[1])
+                        {
+                            GameObject.Find("RoomsAll(Clone)/Room 2 (Scale X 2)/QuizDiamonds/" + nameOfDiamond).GetComponent<MeshCollider>().enabled = false;
+
+                            GameObject.Find("RoomsAll(Clone)/Room 2 (Scale X 2)/Walls/Room_2_Intermediary_Gate_1").GetComponent<Animator>().Play("Room2GateOpen", 0, 0.0f);
+                            GameObject.Find("RoomsAll(Clone)/Room 2 (Scale X 2)/Walls/Room_2_Intermediary_Gate_1").GetComponent<DoorController>().doorOpen = true;
+
+                            if (GameObject.Find("RoomsAll(Clone)/Room 2 (Scale X 2)/Walls/Room_2_Intermediary_Gate_1").GetComponent<AudioSource>())
+                            {
+                                GameObject.Find("RoomsAll(Clone)/Room 2 (Scale X 2)/Walls/Room_2_Intermediary_Gate_1").GetComponent<AudioSource>().Play();
+                            }
+                        }
+                        break;
+                    case "QuizDiamond3":
+                        if (pointsCount >= arrayList[2])
+                        {
+                            GameObject.Find("RoomsAll(Clone)/Room 2 (Scale X 2)/QuizDiamonds/" + nameOfDiamond).GetComponent<MeshCollider>().enabled = false;
+
+                            GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/Miscellaneous/Room3_Entrance").GetComponent<Animator>().Play("Room3EntranceDoorOpen", 0, 0.0f);
+                            GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/Miscellaneous/Room3_Entrance").GetComponent<DoorController>().doorOpen = true;
+
+                            if (GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/Miscellaneous/Room3_Entrance").GetComponent<AudioSource>())
+                            {
+                                GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/Miscellaneous/Room3_Entrance").GetComponent<AudioSource>().Play();
+                            }
+                        }
+                        break;
+                    case "QuizDiamond4":
+                        if (pointsCount >= arrayList[3])
+                        {
+                            GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/QuizDiamonds/" + nameOfDiamond).GetComponent<MeshCollider>().enabled = false;
+
+                            GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/Miscellaneous/Room3_Door_Iron").GetComponent<Animator>().Play("TowerDoorOpen", 0, 0.0f);
+                            GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/Miscellaneous/Room3_Door_Iron").GetComponent<DoorController>().doorOpen = true;
+
+                            GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/Miscellaneous/Room3_Door_Wooden_Round").GetComponent<Animator>().Play("Room1EntranceDoorOpen", 0, 0.0f);
+                            GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/Miscellaneous/Room3_Door_Wooden_Round").GetComponent<DoorController>().doorOpen = true;
+
+                            if (GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/Miscellaneous/Room3_Door_Iron").GetComponent<AudioSource>())
+                            {
+                                GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/Miscellaneous/Room3_Door_Iron").GetComponent<AudioSource>().Play();
+                            }
+                        }
+                        break;
+                    case "QuizDiamond5":
+                        if (pointsCount >= arrayList[4])
+                        {
+                            GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/QuizDiamonds/QuizDiamond5").GetComponent<MeshCollider>().enabled = false;
+
+                            if (!isDoorOpen)
+                            {
+                                GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/Miscellaneous/Tower_Door").GetComponent<Animator>().Play("TowerDoorOpen", 0, 0.0f);
+                                GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/Miscellaneous/Tower_Door").GetComponent<DoorController>().doorOpen = true;
+                                GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/Miscellaneous/Barrel_Secret_Entrance").GetComponent<Animator>().Play("BarrelOpen", 0, 0.0f);
+                                GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/Miscellaneous/Barrel_Secret_Entrance").GetComponent<DoorController>().doorOpen = true;
+
+                                if (GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/Miscellaneous/Tower_Door").GetComponent<AudioSource>())
+                                {
+                                    GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/Miscellaneous/Tower_Door").GetComponent<AudioSource>().Play();
+                                }
+                                isDoorOpen = true;
+                            }
+                            arrayList[4] += 50;
+                        }
+                        break;
+                    case "QuizDiamond6":
+                        if (pointsCount >= arrayList[4])
+                        {
+                            GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/QuizDiamonds/QuizDiamond6").GetComponent<MeshCollider>().enabled = false;
+
+                            if (!isDoorOpen)
+                            {
+                                GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/Miscellaneous/Barrel_Secret_Entrance").GetComponent<Animator>().Play("BarrelOpen", 0, 0.0f);
+                                GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/Miscellaneous/Barrel_Secret_Entrance").GetComponent<DoorController>().doorOpen = true;
+                                GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/Miscellaneous/Tower_Door").GetComponent<Animator>().Play("TowerDoorOpen", 0, 0.0f);
+                                GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/Miscellaneous/Tower_Door").GetComponent<DoorController>().doorOpen = true;
+
+                                if (GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/Miscellaneous/Barrel_Secret_Entrance").GetComponent<AudioSource>())
+                                {
+                                    GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/Miscellaneous/Barrel_Secret_Entrance").GetComponent<AudioSource>().Play();
+                                }
+                                isDoorOpen = true;
+                            }
+                            arrayList[4] += 50;
+                        }
+                        break;
+                    default: break;
+                }
+                
             }
             else
             {
