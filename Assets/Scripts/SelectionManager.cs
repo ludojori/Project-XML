@@ -35,7 +35,7 @@ public class SelectionManager : MonoBehaviour
         arrayList = new List<int>();
         xmlReader = GameObject.Find("GlobalGameManager").GetComponent<XMLReader>();
 
-        Dictionary<string, int> doors = xmlReader.LoadAllDoors();
+        Dictionary<string, int> doors = xmlReader.LoadAllDiamonds();
         foreach (int value in doors.Values)
         {
             if (!arrayList.Contains(value))

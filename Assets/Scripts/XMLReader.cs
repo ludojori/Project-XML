@@ -95,25 +95,25 @@ namespace QuizGame
             }
         }
 
-        public Dictionary<string, int> LoadAllDoors()
+        public Dictionary<string, int> LoadAllDiamonds()
         {
             XmlNode root = quizGameXml.DocumentElement;
-            XmlNodeList xmlDoors = root.SelectNodes("descendant::doors/door");
-            Dictionary<string, int> doors = new Dictionary<string, int>();
+            XmlNodeList xmlDiamonds = root.SelectNodes("descendant::diamonds/diamond");
+            Dictionary<string, int> diamonds = new Dictionary<string, int>();
             
-            if(xmlDoors == null)
+            if(xmlDiamonds == null)
             {
-                Debug.Log("xmlDoors is null.");
+                Debug.Log("xmlDiamonds is null.");
             }
-            if (doors == null)
+            if (diamonds == null)
             {
-                Debug.Log("doors is null.");
+                Debug.Log("diamonds is null.");
             }
-            foreach(XmlNode xmlDoor in xmlDoors)
+            foreach(XmlNode xmlDiamond in xmlDiamonds)
             {
-                doors.Add(xmlDoor.Attributes["prefab_name"].Value, int.Parse(xmlDoor.Attributes["limit_points"].Value));
+                diamonds.Add(xmlDiamond.Attributes["prefab_name"].Value, int.Parse(xmlDiamond.Attributes["limit_points"].Value));
             }
-            return doors;
+            return diamonds;
         }
 
         /*

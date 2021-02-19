@@ -13,7 +13,8 @@ public class UIManager : MonoBehaviour
     Canvas questionOptionPrefab;
     XMLReader xmlReader;
 
-    public static List<int> arrayList;
+    //public static List<int> arrayList;
+    static Dictionary<string, int> diamonds;
 
     List<QuizQuestion> questions;
     List<QuizQuestion> questionsCopy;
@@ -38,17 +39,17 @@ public class UIManager : MonoBehaviour
         questions = new List<QuizQuestion>(xmlReader.questions);
         questionsCopy = new List<QuizQuestion>(questions);
         
-        arrayList = new List<int>();
+        //arrayList = new List<int>();
 
-        Dictionary<string, int> doors = xmlReader.LoadAllDoors();
-        foreach (int value in doors.Values)
+        diamonds = xmlReader.LoadAllDiamonds();
+       /* foreach (int value in diamonds.Values)
         {
             if (!arrayList.Contains(value)) 
             {
                 arrayList.Add(value);
             }
             
-        }
+        }*/
         
     }
 
@@ -112,6 +113,13 @@ public class UIManager : MonoBehaviour
         GameObject.Find("UIManager").GetComponent<UIManager>().isQuestionCanvasActive = false;
         Destroy(GameObject.Find("QuestionCanvas(Clone)"));
         GameObject.Find("CustomFPSController").GetComponent<CustomFirstPersonController>().enabled = true;
+        if (pointsCount >= 300)
+        {
+            GameObject endGameCanvasPrefab = Resources.Load("EndGameCanvas") as GameObject;
+            GameObject endGameCanvasInstance = Instantiate(endGameCanvasPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            endGameCanvasPrefab.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
+            Destroy(endGameCanvasInstance, 3.0f);
+        }
     }
 
     public void OnOptionClicked()
@@ -133,7 +141,7 @@ public class UIManager : MonoBehaviour
                 switch (nameOfDiamond)
                 {
                     case "QuizDiamond1":
-                        if (pointsCount >= arrayList[0]) 
+                        if (pointsCount >= diamonds[nameOfDiamond]) 
                         { 
                             GameObject.Find("RoomsAll(Clone)/Room 1/"+ nameOfDiamond).GetComponent<MeshCollider>().enabled = false;
 
@@ -147,7 +155,7 @@ public class UIManager : MonoBehaviour
                         } 
                         break;
                     case "QuizDiamond2":
-                        if (pointsCount >= arrayList[1])
+                        if (pointsCount >= diamonds[nameOfDiamond])
                         {
                             GameObject.Find("RoomsAll(Clone)/Room 2 (Scale X 2)/QuizDiamonds/" + nameOfDiamond).GetComponent<MeshCollider>().enabled = false;
 
@@ -161,7 +169,7 @@ public class UIManager : MonoBehaviour
                         }
                         break;
                     case "QuizDiamond3":
-                        if (pointsCount >= arrayList[2])
+                        if (pointsCount >= diamonds[nameOfDiamond])
                         {
                             GameObject.Find("RoomsAll(Clone)/Room 2 (Scale X 2)/QuizDiamonds/" + nameOfDiamond).GetComponent<MeshCollider>().enabled = false;
 
@@ -175,7 +183,7 @@ public class UIManager : MonoBehaviour
                         }
                         break;
                     case "QuizDiamond4":
-                        if (pointsCount >= arrayList[3])
+                        if (pointsCount >= diamonds[nameOfDiamond])
                         {
                             GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/QuizDiamonds/" + nameOfDiamond).GetComponent<MeshCollider>().enabled = false;
 
@@ -188,11 +196,13 @@ public class UIManager : MonoBehaviour
                             if (GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/Miscellaneous/Room3_Door_Iron").GetComponent<AudioSource>())
                             {
                                 GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/Miscellaneous/Room3_Door_Iron").GetComponent<AudioSource>().Play();
+                                
+                                GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/Miscellaneous/Room3_Door_Wooden_Round").GetComponent<AudioSource>().Play();
                             }
                         }
                         break;
                     case "QuizDiamond5":
-                        if (pointsCount >= arrayList[4])
+                        if (pointsCount >= diamonds[nameOfDiamond])
                         {
                             GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/QuizDiamonds/QuizDiamond5").GetComponent<MeshCollider>().enabled = false;
 
@@ -209,11 +219,11 @@ public class UIManager : MonoBehaviour
                                 }
                                 isDoorOpen = true;
                             }
-                            arrayList[4] += 50;
+                            diamonds["QuizDiamond6"] += 50;
                         }
                         break;
                     case "QuizDiamond6":
-                        if (pointsCount >= arrayList[4])
+                        if (pointsCount >= diamonds[nameOfDiamond])
                         {
                             GameObject.Find("RoomsAll(Clone)/Room 3 (Scale X 2)/QuizDiamonds/QuizDiamond6").GetComponent<MeshCollider>().enabled = false;
 
@@ -230,7 +240,7 @@ public class UIManager : MonoBehaviour
                                 }
                                 isDoorOpen = true;
                             }
-                            arrayList[4] += 50;
+                            diamonds["QuizDiamond5"] += 50;
                         }
                         break;
                     default: break;

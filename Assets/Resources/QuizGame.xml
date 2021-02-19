@@ -1,22 +1,22 @@
 <!DOCTYPE quizgame [
-<!ELEMENT quizgame (gamesettings?, rooms, doors, quizquestions)>
+<!ELEMENT quizgame (gamesettings?, rooms, diamonds, quizquestions)>
 <!ELEMENT rooms (room+)>
 <!ELEMENT room (transform)>
 <!ELEMENT transform (position, rotation, scale)>
-<!ELEMENT doors (door+)>
+<!ELEMENT diamonds (diamond+)>
 <!ELEMENT quizquestions (quizquestion+)>
 <!ELEMENT quizquestion (question, option+)>
 <!ELEMENT gamesettings ANY>
 <!ELEMENT position EMPTY>
 <!ELEMENT rotation EMPTY>
 <!ELEMENT scale EMPTY>
-<!ELEMENT door EMPTY>
+<!ELEMENT diamond EMPTY>
 <!ATTLIST room prefab_name CDATA #REQUIRED next_to_room CDATA #REQUIRED hide_door_cover_at_wall CDATA #REQUIRED>
 <!ATTLIST position x CDATA #REQUIRED y CDATA #REQUIRED z CDATA #REQUIRED>
 <!ATTLIST rotation x CDATA #REQUIRED y CDATA #REQUIRED z CDATA #REQUIRED>
 <!ATTLIST scale x CDATA #REQUIRED y CDATA #REQUIRED z CDATA #REQUIRED>
-<!ATTLIST door prefab_name CDATA #REQUIRED>
-<!ATTLIST door limit_points CDATA #REQUIRED>
+<!ATTLIST diamond prefab_name CDATA #REQUIRED>
+<!ATTLIST diamond limit_points CDATA #REQUIRED>
 <!ATTLIST quizquestion idx CDATA #REQUIRED>
 <!ATTLIST quizquestion points CDATA #REQUIRED>
 <!ATTLIST option idx CDATA #REQUIRED>
@@ -41,15 +41,14 @@
                 </room>
     </rooms>
 
-    <doors>
-                <door prefab_name="Room1 Exit" limit_points="50"/>
-                <door prefab_name="Room_2_Intermediary_Gate_1" limit_points="100"/>
-                <door prefab_name="Room3_Entrance" limit_points="150"/>
-                <door prefab_name="Room3_Door_Iron" limit_points="200"/>
-                <door prefab_name="Room3_Door_Wooden_Round" limit_points="200"/>
-                <door prefab_name="Tower_Door" limit_points="250"/>
-                <door prefab_name="Barrel_Secret_Entrance" limit_points="250"/>
-    </doors>
+    <diamonds>
+      <diamond prefab_name="QuizDiamond1" limit_points="50"/>
+      <diamond prefab_name="QuizDiamond2" limit_points="100"/>
+      <diamond prefab_name="QuizDiamond3" limit_points="150"/>
+      <diamond prefab_name="QuizDiamond4" limit_points="200"/>
+      <diamond prefab_name="QuizDiamond5" limit_points="250"/>
+      <diamond prefab_name="QuizDiamond6" limit_points="250"/>
+    </diamonds>
 
     <quizquestions>
                 <quizquestion idx="0" points="10">
