@@ -13,7 +13,6 @@ public class UIManager : MonoBehaviour
     Canvas questionOptionPrefab;
     XMLReader xmlReader;
 
-    //public static List<int> arrayList;
     static Dictionary<string, int> diamonds;
 
     List<QuizQuestion> questions;
@@ -34,23 +33,11 @@ public class UIManager : MonoBehaviour
         quizGamePointsCanvasPrefab.name = "QuizGamePointsCanvas";
         quizGamePointsCanvasPrefab.renderMode = RenderMode.ScreenSpaceOverlay;
 
-
         xmlReader = GameObject.Find("GlobalGameManager").GetComponent<XMLReader>();
         questions = new List<QuizQuestion>(xmlReader.questions);
         questionsCopy = new List<QuizQuestion>(questions);
-        
-        //arrayList = new List<int>();
-
+   
         diamonds = xmlReader.LoadAllDiamonds();
-       /* foreach (int value in diamonds.Values)
-        {
-            if (!arrayList.Contains(value)) 
-            {
-                arrayList.Add(value);
-            }
-            
-        }*/
-        
     }
 
     public void GenerateQuestion()
@@ -72,7 +59,7 @@ public class UIManager : MonoBehaviour
         questionText.text = pickedQuestion.questionText;
 
         // Instantiate Options Canvases With Parent Question Canvas
-        float optionSpacing = 500;
+        float optionSpacing = 400;
         foreach (QuizOption option in pickedQuestion.options)
         {
             Canvas questionOption = Instantiate(questionOptionPrefab, questionCanvas.transform, false);
@@ -83,7 +70,7 @@ public class UIManager : MonoBehaviour
             questionOption.transform.SetPositionAndRotation(optionPosition, Quaternion.identity);
             questionOption.GetComponentInChildren<Text>().text = option.text;
 
-            optionSpacing -= 50;
+            optionSpacing -= 70;
         }
 
         GameObject[] options = GameObject.FindGameObjectsWithTag("OptionButton");
@@ -133,6 +120,7 @@ public class UIManager : MonoBehaviour
             if (pickedQuestion.options[optionIndex].isTrue)
             {
                 EventSystem.current.currentSelectedGameObject.GetComponent<Image>().color = Color.green;
+                GameObject.Find("QuestionCanvas(Clone)/QuestionOption(Clone)/"+optionIndex+ "/TextBackground").GetComponent<Image>().color= Color.green;
                 Text pointsText = GameObject.Find("QuizGamePointsCanvas(Clone)/PointsDisplay/PointsCounter").GetComponent<Text>();
                 pointsCount += questionPoints;
                 pointsText.text = pointsCount.ToString();
@@ -250,6 +238,7 @@ public class UIManager : MonoBehaviour
             else
             {
                 EventSystem.current.currentSelectedGameObject.GetComponent<Image>().color = Color.red;
+                GameObject.Find("QuestionCanvas(Clone)/QuestionOption(Clone)/" + optionIndex + "/TextBackground").GetComponent<Image>().color = Color.red;
             }
 
             GameObject[] options = GameObject.FindGameObjectsWithTag("OptionButton");

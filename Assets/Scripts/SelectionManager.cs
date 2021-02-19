@@ -9,9 +9,7 @@ public class SelectionManager : MonoBehaviour
     private string selectableTag = "Selectable";
     [SerializeField, Tooltip("The distance from which the selectable item can be selected.")]
     private float selectDistance = 0.0f;
-    public static List<int> arrayList;
     public static string diamondName;
-    XMLReader xmlReader;
 
 
     private ISelectionResponse _selectionResponse;
@@ -32,18 +30,6 @@ public class SelectionManager : MonoBehaviour
 
     private void Start()
     {
-        arrayList = new List<int>();
-        xmlReader = GameObject.Find("GlobalGameManager").GetComponent<XMLReader>();
-
-        Dictionary<string, int> doors = xmlReader.LoadAllDiamonds();
-        foreach (int value in doors.Values)
-        {
-            if (!arrayList.Contains(value))
-            {
-                arrayList.Add(value);
-            }
-
-        }
     }
 
     // Update is called once per frame
